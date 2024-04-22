@@ -1,0 +1,66 @@
+<html>
+<body>
+    <div id="app"></div>
+    <!-- To use React in your newly created project, load two React scripts from an external website called "unpkg.com" -->
+    <!-- react is the core React library. -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <!-- react-dom provides DOM-specific methods that enable you to use React with the DOM. -->
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- browsers don't understand JSX out of the box, so you'll need a JavaScript compiler, such as a Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/Javascript">
+        // This is imperative code
+
+        // Select the div element with 'app' id
+        // const app = document.getElementById("app");
+
+        // Create a new h1 element
+        // const header = document.createElement("h1");
+
+        // Create a new text node for the h1 element
+        // const text = 'Develop. Preview. Ship.';
+        // const headerContent = document.createTextNode(text);
+
+        // Append the text to the H1 element
+        // header.appendChild(headerContent);
+
+        // Place the H1 element inside the div
+        // app.appendChild(header);
+    </script>
+    <!-- We use jsx thanks to Babel, and not just JavaScript -->
+    <script type="text/babel">
+        // declarative React code
+        const domNode = document.getElementById("app");
+
+        function Header(props) {
+            console.log(props)
+            return <h1>{props.title ? props.title : 'Default Title'}</h1>;
+        }
+
+        function HomePage() {
+            const names = ['Ada Lovelace', 'Grace Hopper', 'Margaret Hamilton'];
+            const [likes, setLikes] = React.useState(0);
+
+            function handleClick() {
+                setLikes(likes + 1);
+            }
+            
+            return (
+                <div>
+                    {/* Nesting the Header component */}
+                    <Header title="React" />
+                    <Header title="Develop. Preview. Ship." />
+                    <ul>
+                        {names.map((name) => (
+                          <li key={name}>{name}</li>
+                        ))}
+                    </ul>
+                    <button onClick={handleClick}>Likes ({likes})</button>
+                </div>);
+        }
+
+        const root = ReactDOM.createRoot(domNode)
+        root.render(<HomePage />)
+    </script>
+</body>
+</html>
